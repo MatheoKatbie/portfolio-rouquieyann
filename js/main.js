@@ -39,14 +39,22 @@ contactForm.addEventListener('submit', (e) => {
   const email = document.getElementById('email').value
   const message = document.getElementById('message').value
 
-  // Ici, vous pouvez ajouter le code pour envoyer les données à un serveur
+  // Simulation d'envoi (à remplacer par votre logique d'envoi réelle)
   console.log('Formulaire soumis:', { name, email, message })
+
+  // Création du message de confirmation
+  const confirmationMessage = document.createElement('div')
+  confirmationMessage.className = 'confirmation-message'
+  confirmationMessage.textContent = 'Message envoyé avec succès!'
+  document.body.appendChild(confirmationMessage)
+
+  // Suppression du message après l'animation
+  setTimeout(() => {
+    confirmationMessage.remove()
+  }, 3000)
 
   // Réinitialisation du formulaire
   contactForm.reset()
-
-  // Message de confirmation
-  alert('Message envoyé avec succès!')
 })
 
 // Animation au scroll avec Intersection Observer
