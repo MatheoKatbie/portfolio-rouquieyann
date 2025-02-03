@@ -138,7 +138,7 @@ function App() {
   const projects = [
     {
       title: 'DailyBank',
-      image: '/projects/dailybank.png',
+      image: '/portfolio-rouquieyann/projects/dailybank.png',
       description:
         'Application de gestion bancaire développée en Java avec JavaFX. Permet la gestion des comptes, des clients et des opérations bancaires.',
       technologies: ['Java', 'SQL', 'Git'],
@@ -152,7 +152,7 @@ function App() {
     },
     {
       title: 'Emcaffe',
-      image: '/projects/emcaffe.png',
+      image: '/portfolio-rouquieyann/projects/emcaffe.png',
       description: 'Marketplace de vente de café en ligne développé avec React, Node.js et Supabase.',
       technologies: ['React', 'Node.js', 'Supabase', 'Git'],
       year: '2024',
@@ -164,7 +164,7 @@ function App() {
     },
     {
       title: 'Portfolio',
-      image: '/projects/portfolio.png',
+      image: '/portfolio-rouquieyann/projects/portfolio.png',
       description: 'Portfolio personnel développé avec React et TailwindCSS, présentant mes projets et compétences.',
       technologies: ['React', 'TailwindCSS', 'Framer Motion'],
       year: '2024',
@@ -172,7 +172,7 @@ function App() {
     },
     {
       title: 'Jeux Olympiques',
-      image: '/projects/jo.png',
+      image: '/portfolio-rouquieyann/projects/jo.png',
       description:
         'Application de gestion des Jeux Olympiques permettant de gérer les athlètes, les disciplines et les pays.',
       technologies: ['PHP', 'Synfony', 'PHPMyAdmin', 'Bootstrap'],
