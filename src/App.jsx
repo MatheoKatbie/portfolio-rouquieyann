@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useScroll } from "framer-motion";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence, useScroll } from 'framer-motion'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
 import {
   FaCode,
   FaDatabase,
@@ -18,286 +18,278 @@ import {
   FaMapMarkerAlt,
   FaPhone,
   FaFilePdf,
-} from "react-icons/fa";
-import "./App.css";
+} from 'react-icons/fa'
+import './App.css'
 
 function App() {
-  const { scrollY } = useScroll();
-  const [hidden, setHidden] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+  const { scrollY } = useScroll()
+  const [hidden, setHidden] = useState(false)
+  const [activeSection, setActiveSection] = useState('home')
   // Animation pour le texte qui apparaît lettre par lettre
-  const [text] = useState("Développeur Full Stack");
-  const [displayText, setDisplayText] = useState("");
-  const [index, setIndex] = useState(0);
+  const [text] = useState('Développeur Full Stack')
+  const [displayText, setDisplayText] = useState('')
+  const [index, setIndex] = useState(0)
   // Nouvel état pour le formulaire
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false)
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [selectedProject, setSelectedProject] = useState(null);
+    name: '',
+    email: '',
+    message: '',
+  })
+  const [selectedProject, setSelectedProject] = useState(null)
 
   const competences = [
     {
       title: "Réaliser un développement d'application",
       icon: <FaCode className="w-8 h-8 mb-4" />,
-      description:
-        "Conception et développement d'applications en suivant les bonnes pratiques",
-      badges: ["Java", "Python", "JavaScript", "Angular"],
-      projetsAssocies: ["DailyBank", "Emcaffe", "Portfolio", "Jeux Olympiques"],
+      description: "Conception et développement d'applications en suivant les bonnes pratiques",
+      badges: ['Java', 'Python', 'JavaScript', 'Angular'],
+      projetsAssocies: ['DailyBank', 'Emcaffe', 'Portfolio', 'Jeux Olympiques'],
     },
     {
-      title: "Optimiser des applications",
+      title: 'Optimiser des applications',
       icon: <FaCogs className="w-8 h-8 mb-4" />,
-      description:
-        "Amélioration des performances et de la qualité des applications",
-      badges: ["JUnit", "Git", "Docker"],
-      projetsAssocies: ["DailyBank", "Emcaffe"],
+      description: 'Amélioration des performances et de la qualité des applications',
+      badges: ['JUnit', 'Git', 'Docker'],
+      projetsAssocies: ['DailyBank', 'Emcaffe'],
     },
     {
-      title: "Administrer des systèmes informatiques",
+      title: 'Administrer des systèmes informatiques',
       icon: <FaDatabase className="w-8 h-8 mb-4" />,
-      description: "Gestion et maintenance des systèmes et réseaux",
-      badges: ["Linux", "Apache", "Docker"],
-      projetsAssocies: ["Jeux Olympiques"],
+      description: 'Gestion et maintenance des systèmes et réseaux',
+      badges: ['Linux', 'Apache', 'Docker'],
+      projetsAssocies: ['Jeux Olympiques'],
     },
     {
-      title: "Gérer des données",
+      title: 'Gérer des données',
       icon: <FaProjectDiagram className="w-8 h-8 mb-4" />,
-      description: "Conception et administration de bases de données",
-      badges: ["MySQL", "PostgreSQL", "MongoDB", "Oracle", "SQL Server"],
-      projetsAssocies: ["DailyBank", "Emcaffe", "Jeux Olympiques"],
+      description: 'Conception et administration de bases de données',
+      badges: ['MySQL', 'PostgreSQL', 'MongoDB', 'Oracle', 'SQL Server'],
+      projetsAssocies: ['DailyBank', 'Emcaffe', 'Jeux Olympiques'],
     },
     {
-      title: "Conduire un projet",
+      title: 'Conduire un projet',
       icon: <FaUsers className="w-8 h-8 mb-4" />,
       description: "Management d'équipe et gestion de projet agile",
-      badges: ["Gantt", "GitHub", "GitLab"],
-      projetsAssocies: ["Portfolio", "Jeux Olympiques"],
+      badges: ['Gantt', 'GitHub', 'GitLab'],
+      projetsAssocies: ['Portfolio', 'Jeux Olympiques'],
     },
     {
-      title: "Travailler dans une équipe informatique",
+      title: 'Travailler dans une équipe informatique',
       icon: <FaShieldAlt className="w-8 h-8 mb-4" />,
-      description: "Collaboration, communication et veille technologique",
-      badges: ["Scrum", "Agile"],
-      projetsAssocies: ["DailyBank", "Emcaffe"],
+      description: 'Collaboration, communication et veille technologique',
+      badges: ['Scrum', 'Agile'],
+      projetsAssocies: ['DailyBank', 'Emcaffe'],
     },
-  ];
+  ]
 
   const technologies = {
     languages: [
       {
-        name: "Java",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+        name: 'Java',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
       },
       {
-        name: "Python",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+        name: 'Python',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
       },
       {
-        name: "C#",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg",
+        name: 'C#',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg',
       },
       {
-        name: "JavaScript",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+        name: 'JavaScript',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
       },
     ],
     frontend: [
       {
-        name: "Vue JS",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
+        name: 'Vue JS',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
       },
       {
-        name: "Angular",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",
+        name: 'Angular',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg',
       },
       {
-        name: "HTML5",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+        name: 'HTML5',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
       },
       {
-        name: "CSS3",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+        name: 'CSS3',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
       },
     ],
     backend: [
       {
-        name: "Node.js",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+        name: 'Node.js',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
       },
       {
-        name: "Python",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+        name: 'Python',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
       },
     ],
     tools: [
       {
-        name: "Git",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+        name: 'Git',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
       },
       {
-        name: "GitHub",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+        name: 'GitHub',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
       },
       {
-        name: "Docker",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+        name: 'Docker',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
       },
       {
-        name: "VSCode",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
+        name: 'VSCode',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg',
       },
     ],
-  };
+  }
 
   const parcours = [
     {
-      period: "2024-2025",
-      title: "Alternant Développeur Vue JS",
-      location: "CNRS",
-      type: "professional",
+      period: '2024-2025',
+      title: 'Alternant Développeur Vue JS',
+      location: 'CNRS',
+      type: 'professional',
       description: "Développement d'applications en Vue JS",
     },
     {
-      period: "2022-2025",
-      title: "BUT Informatique",
-      location: "IUT de Blagnac",
-      type: "education",
-      description: "Formation en développement informatique, en alternance",
+      period: '2022-2025',
+      title: 'BUT Informatique',
+      location: 'IUT de Blagnac',
+      type: 'education',
+      description: 'Formation en développement informatique, en alternance',
     },
     {
-      period: "2016-2022",
-      title: "Armée de Terre",
-      location: "France",
-      type: "military",
+      period: '2016-2022',
+      title: 'Armée de Terre',
+      location: 'France',
+      type: 'military',
       description: "Chef d'equipe en largage aéroporté",
     },
 
     {
-      period: "1945-1948",
-      title: "BAC Pro System Electronique Numériques",
-      location: "Lycée Stéphane-Hessel",
-      type: "education",
-      description:
-        "Sciences et Technologies de l'Industrie et du Développement Durable",
+      period: '1945-1948',
+      title: 'BAC Pro System Electronique Numériques',
+      location: 'Lycée Stéphane-Hessel',
+      type: 'education',
+      description: "Sciences et Technologies de l'Industrie et du Développement Durable",
     },
-  ];
+  ]
 
   const projects = [
     {
-      title: "DailyBank",
-      image: "/portfolio-rouquieyann/projects/dailybank.png",
+      title: 'DailyBank',
+      image: '/portfolio-rouquieyann/projects/dailybank.png',
       description:
-        "Application de gestion bancaire développée en Java avec JavaFX. Permet la gestion des comptes, des clients et des opérations bancaires.",
-      technologies: ["Java", "SQL", "Git"],
-      year: "2023",
+        'Application de gestion bancaire développée en Java avec JavaFX. Permet la gestion des comptes, des clients et des opérations bancaires.',
+      technologies: ['Java', 'SQL', 'Git'],
+      year: '2023',
       competencesAssociees: [
         "Réaliser un développement d'application",
-        "Optimiser des applications",
-        "Gérer des données",
-        "Travailler dans une équipe informatique",
+        'Optimiser des applications',
+        'Gérer des données',
+        'Travailler dans une équipe informatique',
       ],
     },
     {
-      title: "Emcaffe",
-      image: "/portfolio-rouquieyann/projects/emcaffe.png",
-      description:
-        "Marketplace de vente de café en ligne développé avec React, Node.js et Supabase.",
-      technologies: ["React", "Node.js", "Supabase", "Git"],
-      year: "2024",
+      title: 'Emcaffe',
+      image: '/portfolio-rouquieyann/projects/emcaffe.png',
+      description: 'Marketplace de vente de café en ligne développé avec React, Node.js et Supabase.',
+      technologies: ['React', 'Node.js', 'Supabase', 'Git'],
+      year: '2024',
       competencesAssociees: [
         "Réaliser un développement d'application",
-        "Optimiser des applications",
-        "Gérer des données",
+        'Optimiser des applications',
+        'Gérer des données',
       ],
     },
     {
-      title: "Portfolio",
-      image: "/portfolio-rouquieyann/projects/portfolio.png",
-      description:
-        "Portfolio personnel développé avec React et TailwindCSS, présentant mes projets et compétences.",
-      technologies: ["React", "TailwindCSS", "Framer Motion"],
-      year: "2024",
-      competencesAssociees: [
-        "Réaliser un développement d'application",
-        "Conduire un projet",
-      ],
+      title: 'Portfolio',
+      image: '/portfolio-rouquieyann/projects/portfolio.png',
+      description: 'Portfolio personnel développé avec React et TailwindCSS, présentant mes projets et compétences.',
+      technologies: ['React', 'TailwindCSS', 'Framer Motion'],
+      year: '2024',
+      competencesAssociees: ["Réaliser un développement d'application", 'Conduire un projet'],
     },
     {
-      title: "Jeux Olympiques",
-      image: "/portfolio-rouquieyann/projects/jo.png",
+      title: 'Jeux Olympiques',
+      image: '/portfolio-rouquieyann/projects/jo.png',
       description:
-        "Application de gestion des Jeux Olympiques permettant de gérer les athlètes, les disciplines et les pays.",
-      technologies: ["PHP", "Synfony", "PHPMyAdmin", "Bootstrap"],
-      year: "2024",
+        'Application de gestion des Jeux Olympiques permettant de gérer les athlètes, les disciplines et les pays.',
+      technologies: ['PHP', 'Synfony', 'PHPMyAdmin', 'Bootstrap'],
+      year: '2024',
       competencesAssociees: [
-        "Administrer des systèmes informatiques",
-        "Gérer des données",
-        "Conduire un projet",
-        "Travailler dans une équipe informatique",
+        'Administrer des systèmes informatiques',
+        'Gérer des données',
+        'Conduire un projet',
+        'Travailler dans une équipe informatique',
       ],
     },
-  ];
+  ]
 
   // Ajout d'un lien vers le CV et GitHub
   const socialLinks = {
-    github: "https://github.com/YannRouquie",
-    cv: "/portfolio-rouquieyann/cv.pdf",
-    email: "yann.rouquie@gmail.com",
-    phone: "+33600000000",
-  };
+    github: 'https://github.com/YannRouquie',
+    cv: '/portfolio-rouquieyann/cv.pdf',
+    email: 'yann.rouquie@gmail.com',
+    phone: '+33600000000',
+  }
 
   useEffect(() => {
     if (index < text.length) {
       const timeout = setTimeout(() => {
-        setDisplayText((prev) => prev + text[index]);
-        setIndex(index + 1);
-      }, 100);
-      return () => clearTimeout(timeout);
+        setDisplayText((prev) => prev + text[index])
+        setIndex(index + 1)
+      }, 100)
+      return () => clearTimeout(timeout)
     }
-  }, [index, text]);
+  }, [index, text])
 
   useEffect(() => {
     return scrollY.onChange(() => {
       if (scrollY?.current < scrollY?.prev) {
-        setHidden(false);
+        setHidden(false)
       } else if (scrollY?.current > 100 && scrollY?.current > scrollY?.prev) {
-        setHidden(true);
+        setHidden(true)
       }
-    });
-  }, [scrollY]);
+    })
+  }, [scrollY])
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormSubmitted(true);
+    e.preventDefault()
+    setFormSubmitted(true)
     // Reset form
     setFormData({
-      name: "",
-      email: "",
-      message: "",
-    });
+      name: '',
+      email: '',
+      message: '',
+    })
     // Reset success message after 3 seconds
     setTimeout(() => {
-      setFormSubmitted(false);
-    }, 3000);
-  };
+      setFormSubmitted(false)
+    }, 3000)
+  }
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    });
-  };
+    })
+  }
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
+    const element = document.getElementById(sectionId)
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setActiveSection(sectionId);
+      element.scrollIntoView({ behavior: 'smooth' })
+      setActiveSection(sectionId)
     }
-  };
+  }
 
   return (
     <div className="min-h-screen bg-[#1A1A1A] text-white">
@@ -305,10 +297,10 @@ function App() {
       <motion.nav
         variants={{
           visible: { y: 0 },
-          hidden: { y: "-100%" },
+          hidden: { y: '-100%' },
         }}
-        animate={hidden ? "hidden" : "visible"}
-        transition={{ duration: 0.35, ease: "easeInOut" }}
+        animate={hidden ? 'hidden' : 'visible'}
+        transition={{ duration: 0.35, ease: 'easeInOut' }}
         className="fixed top-0 w-full z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-[#333333]"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -324,20 +316,18 @@ function App() {
             {/* Navigation Links */}
             <div className="hidden md:flex items-center space-x-8">
               {[
-                { id: "home", label: "Accueil" },
-                { id: "technologies", label: "Technologies" },
-                { id: "competences", label: "Compétences" },
-                { id: "projets", label: "Projets" },
-                { id: "parcours", label: "Parcours" },
-                { id: "contact", label: "Contact" },
+                { id: 'home', label: 'Accueil' },
+                { id: 'technologies', label: 'Technologies' },
+                { id: 'competences', label: 'Compétences' },
+                { id: 'projets', label: 'Projets' },
+                { id: 'parcours', label: 'Parcours' },
+                { id: 'contact', label: 'Contact' },
               ].map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
                   className={`text-sm font-medium transition-colors hover:text-emerald-400 ${
-                    activeSection === item.id
-                      ? "text-emerald-400"
-                      : "text-gray-300"
+                    activeSection === item.id ? 'text-emerald-400' : 'text-gray-300'
                   }`}
                 >
                   {item.label}
@@ -348,18 +338,8 @@ function App() {
             {/* Mobile Menu Button */}
             <div className="md:hidden">
               <button className="text-gray-300 hover:text-white">
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
             </div>
@@ -368,10 +348,7 @@ function App() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section
-        id="home"
-        className="h-screen flex items-center justify-center relative overflow-hidden"
-      >
+      <section id="home" className="h-screen flex items-center justify-center relative overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -382,14 +359,10 @@ function App() {
             <h1 className="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-green-500 to-teal-600">
               ROUQUIE YANN
             </h1>
-            <h2 className="text-2xl text-gray-400 font-mono mb-6">
-              {displayText}
-            </h2>
+            <h2 className="text-2xl text-gray-400 font-mono mb-6">{displayText}</h2>
             <p className="text-lg text-gray-300 leading-relaxed mb-6">
-              Dépassement de soi, curiosité et esprit d'équipe. Suite a mon
-              parcours militaire je me suis formé à la programmation et à la
-              gestion de projet informatique. J'aime les défis et les nouvelles
-              technologies.
+              Dépassement de soi, curiosité et esprit d'équipe. Suite a mon parcours militaire je me suis formé à la
+              programmation et à la gestion de projet informatique. J'aime les défis et les nouvelles technologies.
             </p>
 
             {/* Social Links */}
@@ -416,11 +389,7 @@ function App() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="w-256 h-64 rounded-full overflow-hidden border-4 border-emerald-500/20 shadow-lg shadow-emerald-500/10"
           >
-            <img
-              src="/portfolio-rouquieyann/photoyann.png"
-              alt="Yann Rouquie"
-              className="w-full h-full object-cover"
-            />
+            <img src="/portfolio-rouquieyann/photoyann.png" alt="Yann Rouquie" className="w-full h-full object-cover" />
           </motion.div>
         </motion.div>
       </section>
@@ -443,24 +412,12 @@ function App() {
                 transition={{ duration: 0.5, delay: index * 0.2 }}
                 className="p-6 rounded-xl bg-[#2A2A2A] backdrop-blur-sm border border-[#333333] hover:border-emerald-500/50 transition-colors"
               >
-                <h3 className="text-xl font-bold mb-6 text-emerald-400">
-                  {category}
-                </h3>
+                <h3 className="text-xl font-bold mb-6 text-emerald-400">{category}</h3>
                 <div className="grid grid-cols-4 gap-6">
                   {techs.map((tech, index) => (
-                    <motion.div
-                      key={index}
-                      whileHover={{ scale: 1.1 }}
-                      className="flex flex-col items-center"
-                    >
-                      <img
-                        src={tech.icon}
-                        alt={tech.name}
-                        className="w-12 h-12"
-                      />
-                      <span className="mt-2 text-sm text-gray-400">
-                        {tech.name}
-                      </span>
+                    <motion.div key={index} whileHover={{ scale: 1.1 }} className="flex flex-col items-center">
+                      <img src={tech.icon} alt={tech.name} className="w-12 h-12" />
+                      <span className="mt-2 text-sm text-gray-400">{tech.name}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -484,20 +441,12 @@ function App() {
               className="p-6 rounded-xl bg-[#2A2A2A] backdrop-blur-sm border border-[#333333] flex flex-col items-center text-center cursor-pointer h-auto hover:bg-[#333333] transition-colors"
             >
               <div className="flex items-center gap-4 mb-3 w-full">
-                <motion.div
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-emerald-400"
-                >
+                <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }} className="text-emerald-400">
                   {competence.icon}
                 </motion.div>
-                <h3 className="text-xl font-bold text-white/90">
-                  {competence.title}
-                </h3>
+                <h3 className="text-xl font-bold text-white/90">{competence.title}</h3>
               </div>
-              <p className="text-gray-400 mb-4 text-sm">
-                {competence.description}
-              </p>
+              <p className="text-gray-400 mb-4 text-sm">{competence.description}</p>
               <div className="flex flex-wrap gap-2 justify-start w-full mb-4">
                 {competence.badges.map((badge, badgeIndex) => (
                   <motion.span
@@ -513,9 +462,7 @@ function App() {
               </div>
               {competence.projetsAssocies.length > 0 && (
                 <div className="w-full">
-                  <p className="text-sm text-gray-400 mb-2">
-                    Projets associés :
-                  </p>
+                  <p className="text-sm text-gray-400 mb-2">Projets associés :</p>
                   <div className="flex flex-wrap gap-2">
                     {competence.projetsAssocies.map((projet, projetIndex) => (
                       <span
@@ -548,10 +495,7 @@ function App() {
             >
               <div className="flex flex-col md:flex-row">
                 {/* Image section */}
-                <div
-                  className="md:w-1/3 relative"
-                  onClick={() => setSelectedProject(project)}
-                >
+                <div className="md:w-1/3 relative" onClick={() => setSelectedProject(project)}>
                   <img
                     src={project.image}
                     alt={project.title}
@@ -564,21 +508,15 @@ function App() {
                 <div className="p-6 md:w-2/3 flex flex-col justify-between">
                   <div>
                     <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-2xl font-bold text-white">
-                        {project.title}
-                      </h3>
-                      <span className="text-sm text-gray-400">
-                        {project.year}
-                      </span>
+                      <h3 className="text-2xl font-bold text-white">{project.title}</h3>
+                      <span className="text-sm text-gray-400">{project.year}</span>
                     </div>
 
                     <p className="text-gray-300 mb-4">{project.description}</p>
 
                     {/* Technologies */}
                     <div className="mb-4">
-                      <p className="text-sm text-gray-400 mb-2">
-                        Technologies :
-                      </p>
+                      <p className="text-sm text-gray-400 mb-2">Technologies :</p>
                       <div className="flex flex-wrap gap-2">
                         {project.technologies.map((tech, techIndex) => (
                           <span
@@ -593,9 +531,7 @@ function App() {
 
                     {/* Compétences BUT */}
                     <div>
-                      <p className="text-sm text-gray-400 mb-2">
-                        Compétences BUT :
-                      </p>
+                      <p className="text-sm text-gray-400 mb-2">Compétences BUT :</p>
                       <div className="flex flex-wrap gap-2">
                         {project.competencesAssociees.map((comp, compIndex) => (
                           <span
@@ -615,18 +551,8 @@ function App() {
                     className="mt-4 px-4 py-2 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-2 self-end"
                   >
                     Voir plus
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
                 </div>
@@ -657,18 +583,8 @@ function App() {
                 onClick={() => setSelectedProject(null)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-white"
               >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
 
@@ -678,17 +594,11 @@ function App() {
                 className="w-full h-64 object-cover rounded-xl mb-6"
               />
 
-              <h3 className="text-2xl font-bold mb-4">
-                {selectedProject.title}
-              </h3>
-              <p className="text-gray-300 mb-4">
-                {selectedProject.description}
-              </p>
+              <h3 className="text-2xl font-bold mb-4">{selectedProject.title}</h3>
+              <p className="text-gray-300 mb-4">{selectedProject.description}</p>
 
               <div className="mb-4">
-                <p className="text-sm text-gray-400 mb-2">
-                  Technologies utilisées :
-                </p>
+                <p className="text-sm text-gray-400 mb-2">Technologies utilisées :</p>
                 <div className="flex flex-wrap gap-2">
                   {selectedProject.technologies.map((tech, index) => (
                     <span
@@ -702,9 +612,7 @@ function App() {
               </div>
 
               <div>
-                <p className="text-sm text-gray-400 mb-2">
-                  Compétences BUT associées :
-                </p>
+                <p className="text-sm text-gray-400 mb-2">Compétences BUT associées :</p>
                 <div className="flex flex-wrap gap-2">
                   {selectedProject.competencesAssociees.map((comp, index) => (
                     <span
@@ -741,35 +649,25 @@ function App() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2 }}
                 className={`relative flex items-center justify-between md:justify-normal gap-8 mb-8 ${
-                  index % 2 === 0 ? "md:flex-row-reverse" : ""
+                  index % 2 === 0 ? 'md:flex-row-reverse' : ''
                 }`}
               >
                 {/* Content */}
-                <div
-                  className={`w-full md:w-5/12 ${
-                    index % 2 === 0 ? "md:text-right" : ""
-                  }`}
-                >
+                <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:text-right' : ''}`}>
                   <motion.div
                     whileHover={{ scale: 1.02 }}
                     className="p-6 rounded-xl bg-[#2A2A2A] backdrop-blur-sm border border-[#333333] hover:bg-[#333333] transition-colors"
                   >
                     <div className="flex items-center gap-3 mb-2">
-                      {item.type === "education" ? (
+                      {item.type === 'education' ? (
                         <FaGraduationCap className="text-emerald-400 text-xl" />
                       ) : (
                         <FaBuilding className="text-green-400 text-xl" />
                       )}
-                      <span className="text-sm font-semibold text-emerald-400">
-                        {item.period}
-                      </span>
+                      <span className="text-sm font-semibold text-emerald-400">{item.period}</span>
                     </div>
-                    <h3 className="text-xl font-bold text-white/90 mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="text-green-400 font-medium mb-2">
-                      {item.location}
-                    </p>
+                    <h3 className="text-xl font-bold text-white/90 mb-1">{item.title}</h3>
+                    <p className="text-green-400 font-medium mb-2">{item.location}</p>
                     <p className="text-gray-400 text-sm">{item.description}</p>
                   </motion.div>
                 </div>
@@ -791,9 +689,7 @@ function App() {
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-[#2A2A2A] p-6 rounded-xl backdrop-blur-sm">
-              <h3 className="text-xl font-bold mb-4">
-                Informations de contact
-              </h3>
+              <h3 className="text-xl font-bold mb-4">Informations de contact</h3>
               <div className="space-y-4">
                 <p className="flex items-center gap-3">
                   <FaEnvelope className="text-emerald-400" />
@@ -808,10 +704,7 @@ function App() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
+                <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">
                   Nom
                 </label>
                 <input
@@ -826,10 +719,7 @@ function App() {
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
+                <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">
                   Email
                 </label>
                 <input
@@ -844,10 +734,7 @@ function App() {
               </div>
 
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
+                <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">
                   Message
                 </label>
                 <textarea
@@ -873,8 +760,14 @@ function App() {
           </div>
         </div>
       </section>
+
+      <footer>
+        <a href="https://lodgic-dev.com" target="_blank">
+          Développé par Lodgic
+        </a>
+      </footer>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
